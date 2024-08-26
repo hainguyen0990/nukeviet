@@ -15,8 +15,8 @@ if (!defined('NV_MAINFILE')) {
 
 $db_config['dbhost'] = '127.0.0.1';
 $db_config['dbport'] = '';
-$db_config['dbname'] = 'laudatory';
-$db_config['dbsystem'] = 'laudatory';
+$db_config['dbname'] = 'nukeviet';
+$db_config['dbsystem'] = 'nukeviet';
 $db_config['dbuname'] = 'root';
 $db_config['dbpass'] = '';
 $db_config['dbtype'] = 'mysql';
@@ -28,7 +28,7 @@ $db_config['prefix'] = 'nv4';
 $global_config['site_domain'] = '';
 $global_config['name_show'] = 0;
 $global_config['idsite'] = 0;
-$global_config['sitekey'] = '734f590db295aae27dc6e068a15fb0bb';// Do not change sitekey!
+$global_config['sitekey'] = '8a953968c2a93d24523cdd8ab89f17b9';// Do not change sitekey!
 $global_config['hashprefix'] = '{SSHA512}';
 $global_config['cached'] = 'files';
 $global_config['session_handler'] = 'files';
