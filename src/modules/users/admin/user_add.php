@@ -80,7 +80,7 @@ if ($nv_Request->isset_request('confirm', 'post')) {
     $_user['adduser_email'] = $nv_Request->get_int('adduser_email', 'post', 0);
     $_user['is_email_verified'] = (int) $nv_Request->get_bool('is_email_verified', 'post', false);
 
-    $custom_fields = $nv_Request->get_array('custom_fields', 'post');
+    $custom_fields = $nv_Request->get_typed_array('custom_fields', 'post', []);
     $custom_fields['first_name'] = $_user['first_name'];
     $custom_fields['last_name'] = $_user['last_name'];
     $custom_fields['gender'] = $_user['gender'];
@@ -473,7 +473,6 @@ if (defined('NV_IS_USER_FORUM')) {
 
         $row['required'] = ($row['required']) ? 'required' : '';
         $xtpl->assign('FIELD', $row);
-
         // Các trường hệ thống xuất độc lập
         if (!empty($row['system'])) {
             if ($row['field'] == 'birthday') {
@@ -600,7 +599,32 @@ if (defined('NV_IS_USER_FORUM')) {
                 }
 
                 $xtpl->parse('main.edit_user.field.loop.file');
+            } elseif ($row['field_type'] == 'matrix') {
+                $row['limited_values'] = !empty($row['limited_values']) ? json_decode($row['limited_values'], true) : [];
+                $row['limited_values']['cols'] = count($row['limited_values']['col_titles']);
+                $row['limited_values']['rows'] = count($row['limited_values']['row_titles']);
+
+                foreach ($row['limited_values']['col_titles'] as $col_title) {
+                    $xtpl->assign('COL_TITLE', htmlspecialchars($col_title));
+                    $xtpl->parse('main.edit_user.field.loop.matrix.col_title');
+                }
+
+                for ($i = 0; $i < $row['limited_values']['rows']; $i++) {
+                    $row_title = isset($row['limited_values']['row_titles'][$i]) ? $row['limited_values']['row_titles'][$i] : '';
+                    $xtpl->assign('ROW_TITLE', htmlspecialchars($row_title));
+                    $xtpl->assign('ROW_INDEX', $i);
+
+                    for ($j = 0; $j < $row['limited_values']['cols']; $j++) {
+                        $xtpl->assign('FIELD', $row);
+                        $xtpl->assign('COL_INDEX', $j);
+                        $xtpl->parse('main.edit_user.field.loop.matrix.rows.cols');
+                    }
+
+                    $xtpl->parse('main.edit_user.field.loop.matrix.rows');
+                }
+                $xtpl->parse('main.edit_user.field.loop.matrix');
             }
+        
             $xtpl->parse('main.edit_user.field.loop');
             $have_custom_fields = true;
         }

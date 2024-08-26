@@ -185,7 +185,7 @@ if (!defined('NV_EDITOR')) {
 }
 require_once NV_ROOTDIR . '/' . NV_EDITORSDIR . '/' . NV_EDITOR . '/nv.php';
 
-$custom_fields = $nv_Request->get_array('custom_fields', 'post');
+$custom_fields = $nv_Request->get_typed_array('custom_fields', 'post', []);
 
 if ($checkss == $array_register['checkss']) {
     $array_register['first_name'] = nv_substr($nv_Request->get_title('first_name', 'post', '', 1), 0, 255);

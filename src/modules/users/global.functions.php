@@ -219,8 +219,9 @@ function fieldsCheck(&$custom_fields, &$array_data, &$query_field, &$valid_field
     }
 
     foreach ($array_field_config as $row_f) {
-        $value = (isset($custom_fields[$row_f['field']])) ? $custom_fields[$row_f['field']] : '';
+        $value = isset($custom_fields[$row_f['field']]) ? $custom_fields[$row_f['field']] : '';
         $field_input_name = empty($row_f['system']) ? 'custom_fields[' . $row_f['field'] . ']' : $row_f['field'];
+
         if (!empty($value)) {
             if ($row_f['field_type'] == 'number') {
                 $pattern = ($row_f['field_choices']['number_type'] == 1) ? '/^[0-9]+$/' : '/^[0-9\.]+$/';
@@ -257,18 +258,6 @@ function fieldsCheck(&$custom_fields, &$array_data, &$query_field, &$valid_field
                         'status' => 'error',
                         'input' => $field_input_name,
                         'mess' => $nv_Lang->getModule('field_min_max_value_date', $row_f['title'], nv_u2d_post($row_f['min_length']), nv_u2d_post($row_f['max_length']))
-                    ];
-                }
-
-                $dd = intval(date('j', $value));
-                $mm = intval(date('n', $value));
-                $yy = intval(date('Y', $value));
-
-                if ($row_f['field'] == 'birthday' and !empty($global_users_config['min_old_user']) and ($yy > (date('Y') - $global_users_config['min_old_user']) or ($yy == (date('Y') - $global_users_config['min_old_user']) and ($mm > date('n') or ($mm == date('n') and $dd > date('j')))))) {
-                    return [
-                        'status' => 'error',
-                        'input' => $field_input_name,
-                        'mess' => $nv_Lang->getModule('old_min_user_error', $global_users_config['min_old_user'])
                     ];
                 }
             } elseif ($row_f['field_type'] == 'textbox') {
@@ -436,6 +425,14 @@ function fieldsCheck(&$custom_fields, &$array_data, &$query_field, &$valid_field
                     }
                 }
                 $value = !empty($temp_value) ? implode(',', $temp_value) : '';
+            } elseif ($row_f['field_type'] == 'matrix') {
+                $matrix_data = $value;
+                
+                if (is_array($matrix_data)) {
+                    // Gán giá trị ma trận cho $query_field mà không chuyển đổi thành chuỗi JSON
+                    $query_field[$row_f['field']] = $matrix_data;
+                }
+                continue;
             }
 
             $custom_fields[$row_f['field']] = $value;
@@ -482,6 +479,7 @@ function userInfoTabDb($data, $userid = 0)
         if (empty($array_field_config)) {
             $array_field_config = get_other_fields(nv_get_users_field_config());
         }
+
         foreach ($array_field_config as $row_f) {
             if ($row_f['field_type'] == 'file') {
                 $old_values = $db->query('SELECT ' . $row_f['field'] . ' FROM ' . NV_MOD_TABLE . '_info WHERE userid = ' . $userid)->fetchColumn();
@@ -499,25 +497,40 @@ function userInfoTabDb($data, $userid = 0)
                     }
                 }
             }
+
+            if ($row_f['field_type'] == 'matrix') {
+                if (isset($data[$row_f['field']]) && is_array($data[$row_f['field']])) {
+                    // Chuyển đổi dữ liệu ma trận thành JSON để lưu trữ
+                    $data[$row_f['field']] = json_encode($data[$row_f['field']], JSON_UNESCAPED_UNICODE);
+                }
+            }
         }
 
         $upd = [];
         foreach ($data as $key => $value) {
-            $upd[] = $key . '=' . $db->quote($value);
+            if (is_array($value)) {
+                // Chuyển đổi mảng thành JSON trước khi lưu
+                $value = json_encode($value, JSON_UNESCAPED_UNICODE);
+            }
+            $upd[] = '`' . $key . '`=' . $db->quote($value);
         }
         $upd = implode(', ', $upd);
 
         return $db->query('UPDATE ' . NV_MOD_TABLE . '_info SET ' . $upd . ' WHERE userid=' . $userid);
     }
-    $keys = implode(', ', array_keys($data));
-    $values = implode(', ', array_map(function ($val) {
-        global $db;
 
+    $keys = implode('`, `', array_keys($data));
+    $values = implode(', ', array_map(function ($val) use ($db) {
+        if (is_array($val)) {
+            // Chuyển đổi mảng thành JSON trước khi lưu
+            $val = json_encode($val, JSON_UNESCAPED_UNICODE);
+        }
         return $db->quote($val);
     }, array_values($data)));
 
-    return $db->query('INSERT INTO ' . NV_MOD_TABLE . '_info (' . $keys . ') VALUES (' . $values . ')');
+    return $db->query('INSERT INTO `' . NV_MOD_TABLE . '_info` (`' . $keys . '`) VALUES (' . $values . ')');
 }
+
 
 /**
  * image_size_info()

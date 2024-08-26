@@ -290,7 +290,33 @@ function user_register($gfx_chk, $checkss, $data_questions, $array_field_config,
                     }
 
                     $xtpl->parse('main.field.loop.file');
+                } elseif ($row['field_type'] == 'matrix') {
+                    $row['limited_values'] = !empty($row['limited_values']) ? json_decode($row['limited_values'], true) : [];
+                    $row['limited_values']['cols'] = count($row['limited_values']['col_titles']);
+                    $row['limited_values']['rows'] = count($row['limited_values']['row_titles']);
+    
+                    foreach ($row['limited_values']['col_titles'] as $col_title) {
+                        $xtpl->assign('COL_TITLE', htmlspecialchars($col_title));
+                        $xtpl->parse('main.field.loop.matrix.col_title');
+                    }
+    
+                    for ($i = 0; $i < $row['limited_values']['rows']; $i++) {
+                        $row_title = isset($row['limited_values']['row_titles'][$i]) ? $row['limited_values']['row_titles'][$i] : '';
+                        $xtpl->assign('ROW_TITLE', htmlspecialchars($row_title));
+                        $xtpl->assign('ROW_INDEX', $i);
+    
+                        for ($j = 0; $j < $row['limited_values']['cols']; $j++) {
+                            $xtpl->assign('FIELD', $row);
+                            $xtpl->assign('COL_INDEX', $j);
+                            $xtpl->parse('main.field.loop.matrix.rows.cols');
+                        }
+    
+                        $xtpl->parse('main.field.loop.matrix.rows');
+                    }
+                    $xtpl->parse('main.field.loop.matrix');
                 }
+
+
                 $xtpl->parse('main.field.loop');
                 $have_custom_fields = true;
             }
@@ -1501,12 +1527,53 @@ function user_welcome($array_field_config, $custom_fields)
                             $value .= '<button type="button" class="btn btn-success btn-file type-' . file_type($pathinfo['extension']) . '" data-url="' . NV_BASE_SITEURL . 'index.php?' . NV_LANG_VARIABLE . '=' . NV_LANG_DATA . '&amp;' . NV_NAME_VARIABLE . '=' . $module_name . '&amp;userfile=' . $tempfile . '&amp;field=' . $row['field'] . '">' . shorten_name($pathinfo['filename'], $pathinfo['extension']) . '</button> ';
                         }
                     }
-                } else {
+                } elseif ($question_type == 'matrix') {
+                    $row['limited_values'] = !empty($row['limited_values']) ? json_decode($row['limited_values'], true) : [];
+                    $row['limited_values']['cols'] = count($row['limited_values']['col_titles']);
+                    $row['limited_values']['rows'] = count($row['limited_values']['row_titles']);
+                    $field_name = $row['field'];
+
+                    if (isset($custom_fields[$field_name])) {
+                        if (is_string($custom_fields[$field_name]) && is_array(json_decode($custom_fields[$field_name], true))) {
+                            $matrix_values = json_decode($custom_fields[$field_name], true);
+                        } elseif (is_array($custom_fields[$field_name])) {
+                            $matrix_values = $custom_fields[$field_name];
+                        } else {
+                            $matrix_values = [];
+                        }
+                    } else {
+                        $matrix_values = [];
+                    }
+
+                    foreach ($row['limited_values']['col_titles'] as $col_title) {
+                        $xtpl->assign('COL_TITLE', htmlspecialchars($col_title));
+                        $xtpl->parse('main.field.loop.matrix.col_title');
+                    }
+
+                    for ($i = 0; $i < $row['limited_values']['rows']; $i++) {
+                        $row_title = isset($row['limited_values']['row_titles'][$i]) ? $row['limited_values']['row_titles'][$i] : '';
+                        $xtpl->assign('ROW_TITLE', htmlspecialchars($row_title));
+                        $xtpl->assign('ROW_INDEX', $i);
+
+                        for ($j = 0; $j < $row['limited_values']['cols']; $j++) {
+                            $cell_value = isset($matrix_values[$i][$j]) ? $matrix_values[$i][$j] : '';
+                            $xtpl->assign('VALUE', $cell_value);
+                            $xtpl->assign('FIELD', $row);
+                            $xtpl->assign('COL_INDEX', $j);
+                            $xtpl->parse('main.field.loop.matrix.rows.cols');
+                        }
+
+                        $xtpl->parse('main.field.loop.matrix.rows');
+                    }
+
+                    $xtpl->parse('main.field.loop.matrix');
+                }
+                else {
                     $value = $custom_fields[$row['field']];
                 }
                 $xtpl->assign('FIELD', [
                     'title' => $row['title'],
-                    'value' => $value
+                    'value' => isset($value) ? $value : ''
                 ]);
                 $xtpl->parse('main.field.loop');
             }

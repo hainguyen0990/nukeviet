@@ -31,6 +31,45 @@ function user_validForm(a) {
     return false;
 }
 
+    function generateMatrix() {
+    const rows = parseInt(document.getElementById('rows').value, 10);
+    const cols = parseInt(document.getElementById('cols').value, 10);
+    const container = document.getElementById('matrixContainer');
+
+    // Xóa nội dung cũ nếu có
+    container.innerHTML = '';
+
+    // Kiểm tra số hàng và số cột phải là số nguyên dương
+    if (isNaN(rows) || rows < 1 || isNaN(cols) || cols < 1) {
+    alert('Số hàng và số cột phải là số nguyên dương.');
+    return; // Ngừng thực hiện nếu có lỗi
+}
+
+    // Kiểm tra số hàng và số cột không được vượt quá 5
+    if (rows > 5 || cols > 5) {
+    alert('Số hàng và số cột không được vượt quá 5.');
+    return; // Ngừng thực hiện nếu có lỗi
+}
+
+    let table = '<table class="table table-striped table-bordered matrix-table"><thead><tr><th></th>';
+
+    // Tạo tiêu đề cột (người dùng có thể chỉnh sửa)
+    for (let c = 1; c <= cols; c++) {
+        table += '<th><input type="text" name="col_titles[]" class="form-control"></th>';}
+    table += '</tr></thead><tbody>';
+
+    for (let r = 1; r <= rows; r++) {
+    table += '<tr><th><input type="text" name="row_titles[]" class="form-control"></th>';
+    for (let c = 1; c <= cols; c++) {
+    table += '<td></td>';
+}
+    table += '</tr>';
+}
+
+    table += '</tbody></table>';
+    container.innerHTML = table;
+}
+
 function user_editcensor_validForm(a) {
     $('[type="submit"]', $(a)).prop('disabled', true);
     $.ajax({
@@ -39,7 +78,7 @@ function user_editcensor_validForm(a) {
         url: $(a).prop("action"),
         data: $(a).serialize(),
         dataType: "json",
-        success: function(b) {
+        success: function (b) {
             $('[type="submit"]', $(a)).prop('disabled', false);
             if (b.status == "error") {
                 alert(b.mess);
@@ -55,7 +94,7 @@ function user_editcensor_validForm(a) {
 function nv_chang_question(qid) {
     var nv_timer = nv_settimeout_disable('id_weight_' + qid, 5000);
     var new_vid = $('#id_weight_' + qid).val();
-    $.post(script_name + '?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=question&nocache=' + new Date().getTime(), 'changeweight=1&qid=' + qid + '&new_vid=' + new_vid, function(res) {
+    $.post(script_name + '?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=question&nocache=' + new Date().getTime(), 'changeweight=1&qid=' + qid + '&new_vid=' + new_vid, function (res) {
         if (res != 'OK') {
             alert(nv_is_change_act_confirm[2]);
         }
@@ -80,7 +119,7 @@ function nv_save_title(qid) {
     }
 
     var nv_timer = nv_settimeout_disable('title_' + qid, 5000);
-    $.post(script_name + '?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=question&nocache=' + new Date().getTime(), 'edit=1&qid=' + qid + '&title=' + new_title.value, function(res) {
+    $.post(script_name + '?' + nv_lang_variable + '=' + nv_lang_data + '&' + nv_name_variable + '=' + nv_module_name + '&' + nv_fc_variable + '=question&nocache=' + new Date().getTime(), 'edit=1&qid=' + qid + '&title=' + new_title.value, function (res) {
         if (res != 'OK') {
             alert(nv_is_change_act_confirm[2]);
         }
@@ -708,7 +747,7 @@ $(document).ready(function() {
     // User field
     $("input[name=field_type]").click(function() {
         var field_type = $("input[name='field_type']:checked").val();
-        $("#textfields, #numberfields, #datefields, #choicetypes, #choiceitems, #choicesql, #editorfields, #filefields").hide();
+        $("#textfields, #numberfields, #datefields, #choicetypes, #choiceitems, #choicesql, #editorfields, #filefields, #matrixfields").hide();
         if (field_type == 'textbox' || field_type == 'textarea' || field_type == 'editor') {
             if (field_type == 'textbox') {
                 $("#li_alphanumeric").show();
@@ -730,6 +769,8 @@ $(document).ready(function() {
             nv_load_current_date();
         } else if (field_type == 'file') {
             $("#filefields").show();
+        } else if (field_type == 'matrix') {
+            $("#matrixfields").show();
         } else {
             $("#choicetypes").show();
             $("#textfields").hide();

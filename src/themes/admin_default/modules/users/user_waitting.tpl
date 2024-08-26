@@ -365,6 +365,30 @@
                                     <!-- END FORFOOTER -->
                                 </div>
                                 <!-- END: file -->
+                                <!-- BEGIN: matrix -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <!-- BEGIN: col_title -->
+                                            <th>{COL_TITLE}</th>
+                                            <!-- END: col_title -->
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!-- BEGIN: rows -->
+                                        <tr>
+                                            <td>{ROW_TITLE}</td>
+                                            <!-- BEGIN: cols -->
+                                            <td><input type="text" class="form-control" name="custom_fields[{FIELD.field}][{ROW_INDEX}][{COL_INDEX}]" value="{VALUE}"></td>
+                                            <!-- END: cols -->
+                                        </tr>
+                                        <!-- END: rows -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END: matrix -->
 
                                 <!-- BEGIN: description --><div class="help-block mb-0">{FIELD.description}</div><!-- END: description -->
                             </td>

@@ -373,6 +373,30 @@
                 </tr>
             </tbody>
         </table>
+        <table class="table table-striped table-bordered" id="matrixfields" {DATAFORM.display_matrixfields}>
+            <caption><em class="fa fa-file-text-o">&nbsp;</em>{LANG.title_matrix}</caption>
+            <colgroup>
+                <col class="w250" />
+            </colgroup>
+            <colgroup>
+                <col class="w250" />
+            </colgroup>
+            <tbody class="field_matrix">
+            <tr>
+                <td>{LANG.column}:</td>
+                <td><input type="number" id="rows" name="rows" class="form-control" min="1" required></td>
+            </tr>
+            <tr>
+                <td>{LANG.row}:</td>
+                <td><input type="number" id="cols" name="cols" class="form-control" min="1" required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="button" class="btn btn-primary" onclick="generateMatrix()">{LANG.matrix_create}</button></td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="matrixContainer" class="matrix-container"></div>
+
     </div>
     <div style="margin-left: 350px;">
         <input type="hidden" value="{DATAFORM.system}" name="system">

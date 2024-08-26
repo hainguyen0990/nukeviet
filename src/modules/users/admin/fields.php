@@ -155,7 +155,7 @@ if ($nv_Request->isset_request('choicesql', 'post')) {
 }
 
 //Add, Edit
-$text_fields = $number_fields = $date_fields = $choice_fields = $file_fields = $choice_type_sql = $choice_type_text = 0;
+$text_fields = $number_fields = $date_fields = $choice_fields = $file_fields = $choice_type_sql = $choice_type_text = $matrix_fields = 0;
 $error = '';
 $field_choices = [];
 if ($nv_Request->isset_request('save', 'post')) {
@@ -252,6 +252,7 @@ if ($nv_Request->isset_request('save', 'post')) {
             }
             $dataform['class'] = $dataform['editor_width'] . '@' . $dataform['editor_height'];
         }
+
         $dataform['min_length'] = $nv_Request->get_int('min_length', 'post', 0);
         if (isset($array_systemfield_cfg[$dataform['field']]) and $dataform['min_length'] < $array_systemfield_cfg[$dataform['field']][0]) {
             $dataform['min_length'] = $array_systemfield_cfg[$dataform['field']][0];
@@ -382,6 +383,24 @@ if ($nv_Request->isset_request('save', 'post')) {
 
             $dataform['limited_values'] = json_encode($datafile);
         }
+    } else if ($dataform['field_type'] == 'matrix') {
+        $matrix_rows = $nv_Request->get_int('matrix_rows', 'post', 3);
+        $matrix_cols = $nv_Request->get_int('matrix_cols', 'post', 3);
+        $dataform['min_length'] = nv_d2u_post($nv_Request->get_string('min_date', 'post'));
+        $dataform['max_length'] = nv_d2u_post($nv_Request->get_string('max_date', 'post'));
+        $dataform['field_choices'] = $dataform['match_regex'] = $dataform['func_callback'] = $dataform['default_value'] = '';
+        $row_titles = $nv_Request->get_array('row_titles', 'post', array());
+        $col_titles = $nv_Request->get_array('col_titles', 'post', array());
+        $dataform['matrix_rows'] = $matrix_rows;
+        $dataform['matrix_cols'] = $matrix_cols;
+        $dataform['row_titles'] = $row_titles;
+        $dataform['col_titles'] = $col_titles;
+        $dataform['limited_values'] = json_encode([
+            'rows' => $matrix_rows,
+            'cols' => $matrix_cols,
+            'row_titles' => $row_titles,
+            'col_titles' => $col_titles
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     } else {
         $dataform['choicetypes'] = $nv_Request->get_string('choicetypes', 'post', '');
         $dataform['match_type'] = 'none';
@@ -447,6 +466,8 @@ if ($nv_Request->isset_request('save', 'post')) {
                 $weight = $db->query('SELECT MAX(weight) FROM ' . NV_MOD_TABLE . '_field')->fetchColumn();
                 $weight = (int) $weight + 1;
 
+                $dataform['match_type'] = 'none';
+
                 $sql = 'INSERT INTO ' . NV_MOD_TABLE . "_field (
                     field, weight, field_type, field_choices, sql_choices, match_type,
                     match_regex, func_callback, min_length, max_length, limited_values,
@@ -471,9 +492,10 @@ if ($nv_Request->isset_request('save', 'post')) {
                     $type_date = '';
                     if ($dataform['field_type'] == 'number' or $dataform['field_type'] == 'date') {
                         $type_date = "DOUBLE NOT NULL DEFAULT '" . $dataform['default_value'] . "'";
-                    } elseif ($dataform['field_type'] == 'file') {
+                    } elseif ($dataform['field_type'] == 'file' OR $dataform['field_type'] == 'matrix') {
                         $type_date = 'TEXT NOT NULL';
-                    } elseif ($dataform['max_length'] <= 255) {
+                    }
+                    elseif ($dataform['max_length'] <= 255 && $dataform['flied_type'] != 'matrix') {
                         $type_date = 'VARCHAR( ' . $dataform['max_length'] . " ) NOT NULL DEFAULT ''";
                     } elseif ($dataform['max_length'] <= 65536) {
                         //2^16 TEXT
@@ -527,7 +549,7 @@ if ($nv_Request->isset_request('save', 'post')) {
                         $type_date = "DOUBLE NOT NULL DEFAULT '" . $dataform['default_value'] . "'";
                     } elseif ($dataform['field_type'] == 'file') {
                         $type_date = 'TEXT NOT NULL';
-                    } elseif ($dataform['max_length'] <= 255) {
+                    } elseif ($dataform['max_length'] <= 255 && $dataform['flied_type'] != 'matrix') {
                         $type_date = 'VARCHAR( ' . $dataform['max_length'] . " ) NOT NULL DEFAULT ''";
                     } elseif ($dataform['max_length'] <= 65536) {
                         //2^16 TEXT
@@ -537,6 +559,9 @@ if ($nv_Request->isset_request('save', 'post')) {
                         $type_date = 'MEDIUMTEXT NOT NULL';
                     } elseif ($dataform['max_length'] <= 4294967296) {
                         //2^32 LONGTEXT
+                        $type_date = 'LONGTEXT NOT NULL';
+                    }
+                    elseif ($dataform['field_type'] == 'matrix') {
                         $type_date = 'LONGTEXT NOT NULL';
                     }
                     try {
@@ -591,7 +616,8 @@ $array_field_type = [
     'radio' => $nv_Lang->getModule('field_type_radio'),
     'checkbox' => $nv_Lang->getModule('field_type_checkbox'),
     'multiselect' => $nv_Lang->getModule('field_type_multiselect'),
-    'file' => $nv_Lang->getModule('field_type_file')
+    'file' => $nv_Lang->getModule('field_type_file'),
+    'matrix' => $nv_Lang->getModule('field_type_matrix')
 ];
 
 $array_choice_type = [
@@ -761,7 +787,11 @@ if ($nv_Request->isset_request('qlist', 'get')) {
         $dataform['max_date'] = nv_u2d_post($dataform['max_length']);
     } elseif ($dataform['field_type'] == 'file') {
         $file_fields = 1;
-    } else {
+    } elseif ($dataform['field_type'] == 'matrix') {
+        $matrix_fields = 1;
+    }
+
+    else {
         $choice_fields = 1;
         if (!empty($dataform['sql_choices'])) {
             $choice_type_sql = 1;
@@ -807,6 +837,7 @@ if ($nv_Request->isset_request('qlist', 'get')) {
     $dataform['display_choiceitems'] = ($choice_type_text) ? '' : 'style="display: none;"';
     $dataform['display_choicesql'] = ($choice_type_sql) ? '' : 'style="display: none;"';
     $dataform['display_filefields'] = ($file_fields) ? '' : 'style="display: none;"';
+    $dataform['display_matrixfields'] = ($matrix_fields) ? '' : 'style="display: none;"';
 
     $dataform['editordisabled'] = ($dataform['field_type'] != 'editor') ? ' style="display: none;"' : '';
     $dataform['classdisabled'] = ($dataform['field_type'] == 'editor') ? ' style="display: none;"' : '';
@@ -869,6 +900,7 @@ if ($nv_Request->isset_request('qlist', 'get')) {
     }
     $array_match_type['regex'] = $nv_Lang->getModule('field_match_type_regex');
     $array_match_type['callback'] = $nv_Lang->getModule('field_match_type_callback');
+    $array_match_type['matrix'] = $nv_Lang->getModule('field_match_type_matrix');
     foreach ($array_match_type as $key => $value) {
         $xtpl->assign('MATCH_TYPE', [
             'key' => $key,

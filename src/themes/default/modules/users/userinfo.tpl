@@ -80,6 +80,33 @@
                 <td>{FIELD.title}</td>
                 <td>{FIELD.value}</td>
             </tr>
+            <!-- BEGIN: matrix -->
+            <tr>
+                <td></td>
+                <td><div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <!-- BEGIN: col_title -->
+                            <th>{COL_TITLE}</th>
+                            <!-- END: col_title -->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- BEGIN: rows -->
+                        <tr>
+                            <td>{ROW_TITLE}</td>
+                            <!-- BEGIN: cols -->
+                            <td>{VALUE}</td>
+                            <!-- END: cols -->
+                        </tr>
+                        <!-- END: rows -->
+                        </tbody>
+                    </table>
+                </div></td>
+            </tr>
+            <!-- END: matrix -->
             <!-- END: loop -->
             <!-- END: field -->
             <!-- BEGIN: group_manage -->

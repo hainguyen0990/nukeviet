@@ -176,7 +176,7 @@ if ($nv_Request->isset_request('confirm', 'post')) {
     $_user['is_official'] = $nv_Request->get_int('is_official', 'post', 0);
     $_user['adduser_email'] = $nv_Request->get_int('adduser_email', 'post', 0);
 
-    $custom_fields = $nv_Request->get_array('custom_fields', 'post');
+    $custom_fields = $nv_Request->get_typed_array('custom_fields', 'post', []);
     $custom_fields['first_name'] = $_user['first_name'];
     $custom_fields['last_name'] = $_user['last_name'];
     $custom_fields['gender'] = $_user['gender'];
@@ -712,6 +712,46 @@ if (defined('NV_IS_USER_FORUM')) {
                     $xtpl->parse('main.edit_user.field.loop.file.addfile');
                 }
                 $xtpl->parse('main.edit_user.field.loop.file');
+            } elseif ($row['field_type'] == 'matrix') {
+                $row['limited_values'] = !empty($row['limited_values']) ? json_decode($row['limited_values'], true) : [];
+                $row['limited_values']['cols'] = count($row['limited_values']['col_titles']);
+                $row['limited_values']['rows'] = count($row['limited_values']['row_titles']);
+                $field_name = $row['field'];
+                if (isset($custom_fields[$field_name])) {
+                    if (is_string($custom_fields[$field_name]) && is_array(json_decode($custom_fields[$field_name], true))) {
+                        $row['value'] = json_decode($custom_fields[$field_name], true);
+                    }
+                    elseif (is_array($custom_fields[$field_name])) {
+                        $row['value'] = $custom_fields[$field_name];
+                    }
+                    else {
+                        $row['value'] = []; 
+                    }
+                } else {
+                    $row['value'] = [];
+                }
+
+                foreach ($row['limited_values']['col_titles'] as $col_title) {
+                    $xtpl->assign('COL_TITLE', htmlspecialchars($col_title));
+                    $xtpl->parse('main.edit_user.field.loop.matrix.col_title');
+                }
+
+                for ($i = 0; $i < $row['limited_values']['rows']; $i++) {
+                    $row_title = isset($row['limited_values']['row_titles'][$i]) ? $row['limited_values']['row_titles'][$i] : '';
+                    $xtpl->assign('ROW_TITLE', htmlspecialchars($row_title));
+                    $xtpl->assign('ROW_INDEX', $i);
+
+                    for ($j = 0; $j < $row['limited_values']['cols']; $j++) {
+                        $value = isset($row['value'][$i][$j]) ? $row['value'][$i][$j] : '';
+                        $xtpl->assign('VALUE', htmlspecialchars($value));
+                        $xtpl->assign('FIELD', $row);
+                        $xtpl->assign('COL_INDEX', $j);
+                        $xtpl->parse('main.edit_user.field.loop.matrix.rows.cols');
+                    }
+
+                    $xtpl->parse('main.edit_user.field.loop.matrix.rows');
+                }
+                $xtpl->parse('main.edit_user.field.loop.matrix');
             }
             $xtpl->parse('main.edit_user.field.loop');
             $have_custom_fields = true;
