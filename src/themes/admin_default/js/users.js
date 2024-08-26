@@ -31,35 +31,23 @@ function user_validForm(a) {
     return false;
 }
 
-    function generateMatrix() {
+    function generateMatrix(placehoder,placehoder2) {
     const rows = parseInt(document.getElementById('rows').value, 10);
     const cols = parseInt(document.getElementById('cols').value, 10);
     const container = document.getElementById('matrixContainer');
 
-    // Xóa nội dung cũ nếu có
     container.innerHTML = '';
-
-    // Kiểm tra số hàng và số cột phải là số nguyên dương
-    if (isNaN(rows) || rows < 1 || isNaN(cols) || cols < 1) {
-    alert('Số hàng và số cột phải là số nguyên dương.');
-    return; // Ngừng thực hiện nếu có lỗi
-}
-
-    // Kiểm tra số hàng và số cột không được vượt quá 5
-    if (rows > 5 || cols > 5) {
-    alert('Số hàng và số cột không được vượt quá 5.');
-    return; // Ngừng thực hiện nếu có lỗi
-}
 
     let table = '<table class="table table-striped table-bordered matrix-table"><thead><tr><th></th>';
 
-    // Tạo tiêu đề cột (người dùng có thể chỉnh sửa)
     for (let c = 1; c <= cols; c++) {
-        table += '<th><input type="text" name="col_titles[]" class="form-control"></th>';}
+        table += '<th><input type="text" name="col_titles[]" class="form-control" placeholder=" '+ placehoder + ' ' + c + '"></th>';
+    }
+
     table += '</tr></thead><tbody>';
 
     for (let r = 1; r <= rows; r++) {
-    table += '<tr><th><input type="text" name="row_titles[]" class="form-control"></th>';
+    table += '<tr><th><input type="text" name="row_titles[]" class="form-control"  placeholder=" '+ placehoder2 + ' ' + r + '"></th>';
     for (let c = 1; c <= cols; c++) {
     table += '<td></td>';
 }

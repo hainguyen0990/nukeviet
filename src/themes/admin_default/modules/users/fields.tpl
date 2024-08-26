@@ -391,7 +391,7 @@
                 <td><input type="number" id="cols" name="cols" class="form-control" min="1" required></td>
             </tr>
             <tr>
-                <td colspan="2"><button type="button" class="btn btn-primary" onclick="generateMatrix()">{LANG.matrix_create}</button></td>
+                <td colspan="2"><button type="button" class="btn btn-primary" onclick="generateMatrix('{LANG.title_row}', '{LANG.title_column}')">{LANG.matrix_create}</button></td>
             </tr>
             </tbody>
         </table>

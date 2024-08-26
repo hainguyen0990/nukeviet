@@ -881,3 +881,5 @@ $lang_module['title_matrix'] = 'Tiêu đề ma trận';
 $lang_module['row'] = 'Số hàng';
 $lang_module['column'] = 'Số cột';
 $lang_module['matrix_create'] = 'Tạo ma trận';
+$lang_module['title_row'] = 'Tiêu đề hàng';
+$lang_module['title_column'] = 'Tiêu đề cột';

@@ -882,3 +882,5 @@ $lang_module['title_matrix'] = 'Matrix title';
 $lang_module['row'] = 'Row';
 $lang_module['column'] = 'Column';
 $lang_module['matrix_create'] = 'Matrix Create';
+$lang_module['title_row'] = 'Title Row';
+$lang_module['title_column'] = 'Title Column';
