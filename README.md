@@ -4,7 +4,7 @@
 ```
 git clone git@github.com:hainguyen0990/nukeviet.git
 cd nukeviet
-git checkout nukeviet4.6.00
+git checkout nukeviet4.6
 ```
 - Virtual host: http://nukeviet.my/
 - CSDL tên nukeviet. Import từ file nukeviet.sql  từ thư mục intern
