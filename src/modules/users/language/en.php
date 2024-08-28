@@ -884,3 +884,4 @@ $lang_module['column'] = 'Column';
 $lang_module['matrix_create'] = 'Matrix Create';
 $lang_module['title_row'] = 'Title Row';
 $lang_module['title_column'] = 'Title Column';
+$lang_module['pls_input_rows_cols'] = 'Please enter the number of rows and columns';
