@@ -31,12 +31,16 @@ function user_validForm(a) {
     return false;
 }
 
-    function generateMatrix(placehoder,placehoder2) {
+function generateMatrix(placehoder,placehoder2, placehoder3) {
     const rows = parseInt(document.getElementById('rows').value, 10);
     const cols = parseInt(document.getElementById('cols').value, 10);
     const container = document.getElementById('matrixContainer');
 
     container.innerHTML = '';
+    if (!rows || !cols || rows <= 0 || cols <= 0) {
+        alert(placehoder3);
+        return;
+    }
 
     let table = '<table class="table table-striped table-bordered matrix-table"><thead><tr><th></th>';
 
@@ -47,12 +51,12 @@ function user_validForm(a) {
     table += '</tr></thead><tbody>';
 
     for (let r = 1; r <= rows; r++) {
-    table += '<tr><th><input type="text" name="row_titles[]" class="form-control"  placeholder=" '+ placehoder2 + ' ' + r + '"></th>';
-    for (let c = 1; c <= cols; c++) {
-    table += '<td></td>';
-}
-    table += '</tr>';
-}
+        table += '<tr><th><input type="text" name="row_titles[]" class="form-control"  placeholder=" '+ placehoder2 + ' ' + r + '"></th>';
+        for (let c = 1; c <= cols; c++) {
+            table += '<td></td>';
+        }
+        table += '</tr>';
+    }
 
     table += '</tbody></table>';
     container.innerHTML = table;
