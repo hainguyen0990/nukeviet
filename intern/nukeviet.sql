@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th8 26, 2024 lúc 04:45 PM
+-- Thời gian đã tạo: Th8 28, 2024 lúc 11:17 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -133,7 +133,7 @@ CREATE TABLE `nv4_authors` (
 --
 
 INSERT INTO `nv4_authors` (`admin_id`, `editor`, `lev`, `lev_expired`, `after_exp_action`, `files_level`, `position`, `main_module`, `admin_theme`, `addtime`, `edittime`, `is_suspend`, `susp_reason`, `pre_check_num`, `pre_last_login`, `pre_last_ip`, `pre_last_agent`, `check_num`, `last_login`, `last_ip`, `last_agent`) VALUES
-(1, 'ckeditor5-classic', 1, 0, NULL, 'adobe,archives,audio,documents,images,real,video|1|1|1', 'Administrator', 'siteinfo', '', 0, 0, 0, '', '', 0, '', '', 'fbf73604188be78e1108dc277105859b', 1724682130, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36');
+(1, 'ckeditor5-classic', 1, 0, NULL, 'adobe,archives,audio,documents,images,real,video|1|1|1', 'Administrator', 'siteinfo', '', 0, 0, 0, '', '', 0, '', '', '94c054d18f62fb03e901233ef174547a', 1724836082, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0');
 
 -- --------------------------------------------------------
 
@@ -546,7 +546,7 @@ INSERT INTO `nv4_config` (`lang`, `module`, `config_name`, `config_value`) VALUE
 ('sys', 'global', 'dump_backup_ext', 'gz'),
 ('sys', 'global', 'dump_interval', '1'),
 ('sys', 'global', 'end_url_variables', ''),
-('sys', 'global', 'error_send_email', 'webmaster@nukeviet.my'),
+('sys', 'global', 'error_send_email', 'webmaster@devlau.local'),
 ('sys', 'global', 'error_separate_file', '0'),
 ('sys', 'global', 'error_set_logs', '1'),
 ('sys', 'global', 'file_allowed_ext', 'adobe,archives,audio,documents,images,real,video'),
@@ -570,7 +570,7 @@ INSERT INTO `nv4_config` (`lang`, `module`, `config_name`, `config_value`) VALUE
 ('sys', 'global', 'login_time_tracking', '5'),
 ('sys', 'global', 'max_requests_300', '150'),
 ('sys', 'global', 'max_requests_60', '40'),
-('sys', 'global', 'my_domains', 'nukeivet.my'),
+('sys', 'global', 'my_domains', 'nukeviet22.my,nukeviet.my'),
 ('sys', 'global', 'notification_active', '1'),
 ('sys', 'global', 'notification_autodel', '15'),
 ('sys', 'global', 'nv_auto_resize', '1'),
@@ -602,7 +602,7 @@ INSERT INTO `nv4_config` (`lang`, `module`, `config_name`, `config_value`) VALUE
 ('sys', 'global', 'spadmin_add_admin', '1'),
 ('sys', 'global', 'static_noquerystring', '0'),
 ('sys', 'global', 'str_referer_blocker', '0'),
-('sys', 'global', 'timestamp', '1724664558'),
+('sys', 'global', 'timestamp', '1724836101'),
 ('sys', 'global', 'two_step_verification', '0'),
 ('sys', 'global', 'unsign_vietwords', '1'),
 ('sys', 'global', 'upload_alt_require', '1'),
@@ -627,7 +627,7 @@ INSERT INTO `nv4_config` (`lang`, `module`, `config_name`, `config_value`) VALUE
 ('sys', 'site', 'captcha_area', 'r,m,p'),
 ('sys', 'site', 'captcha_type', 'captcha'),
 ('sys', 'site', 'cronjobs_interval', '5'),
-('sys', 'site', 'cronjobs_last_time', '1724683278'),
+('sys', 'site', 'cronjobs_last_time', '1724836375'),
 ('sys', 'site', 'cronjobs_launcher', 'system'),
 ('sys', 'site', 'description_length', '170'),
 ('sys', 'site', 'dir_forum', ''),
@@ -684,7 +684,7 @@ INSERT INTO `nv4_config` (`lang`, `module`, `config_name`, `config_value`) VALUE
 ('sys', 'site', 'searchEngineUniqueID', ''),
 ('sys', 'site', 'send_pass', '0'),
 ('sys', 'site', 'show_folder_size', '0'),
-('sys', 'site', 'site_email', 'webmaster@devlau.local'),
+('sys', 'site', 'site_email', 'webmaster@nuekviet.my'),
 ('sys', 'site', 'site_phone', ''),
 ('sys', 'site', 'sitelinks_search_box_schema', '1'),
 ('sys', 'site', 'ssl_https', '0'),
@@ -916,7 +916,7 @@ INSERT INTO `nv4_counter` (`c_type`, `c_val`, `last_update`, `c_count`, `vi_coun
 ('browser', 'chrome', 1724680882, 10, 10, 0),
 ('browser', 'coccoc', 0, 0, 0, 0),
 ('browser', 'coccocbot', 0, 0, 0, 0),
-('browser', 'edge', 1724631416, 12, 12, 0),
+('browser', 'edge', 1724732698, 14, 14, 0),
 ('browser', 'explorer', 0, 0, 0, 0),
 ('browser', 'firebird', 0, 0, 0, 0),
 ('browser', 'firefox', 1724311579, 1, 1, 0),
@@ -949,7 +949,7 @@ INSERT INTO `nv4_counter` (`c_type`, `c_val`, `last_update`, `c_count`, `vi_coun
 ('browser', 'w3cvalidator', 0, 0, 0, 0),
 ('browser', 'webtv', 0, 0, 0, 0),
 ('browser', 'yahooslurp', 0, 0, 0, 0),
-('c_time', 'last', 0, 1724680882, 0, 0),
+('c_time', 'last', 0, 1724732698, 0, 0),
 ('c_time', 'start', 0, 0, 0, 0),
 ('country', 'AD', 0, 0, 0, 0),
 ('country', 'AE', 0, 0, 0, 0),
@@ -1179,7 +1179,7 @@ INSERT INTO `nv4_counter` (`c_type`, `c_val`, `last_update`, `c_count`, `vi_coun
 ('country', 'ZA', 0, 0, 0, 0),
 ('country', 'ZM', 0, 0, 0, 0),
 ('country', 'ZW', 0, 0, 0, 0),
-('country', 'ZZ', 1724680882, 23, 23, 0),
+('country', 'ZZ', 1724732698, 25, 25, 0),
 ('day', '01', 0, 0, 0, 0),
 ('day', '02', 0, 0, 0, 0),
 ('day', '03', 0, 0, 0, 0),
@@ -1205,18 +1205,18 @@ INSERT INTO `nv4_counter` (`c_type`, `c_val`, `last_update`, `c_count`, `vi_coun
 ('day', '23', 1724426024, 2, 2, 0),
 ('day', '24', 0, 0, 0, 0),
 ('day', '25', 1724595167, 2, 2, 0),
-('day', '26', 1724680882, 7, 7, 0),
-('day', '27', 0, 0, 0, 0),
+('day', '26', 1724684645, 8, 8, 0),
+('day', '27', 1724732698, 1, 1, 0),
 ('day', '28', 0, 0, 0, 0),
 ('day', '29', 0, 0, 0, 0),
 ('day', '30', 0, 0, 0, 0),
 ('day', '31', 0, 0, 0, 0),
 ('dayofweek', 'Friday', 1724426024, 2, 2, 0),
-('dayofweek', 'Monday', 1724680882, 10, 10, 0),
+('dayofweek', 'Monday', 1724684645, 11, 11, 0),
 ('dayofweek', 'Saturday', 0, 0, 0, 0),
 ('dayofweek', 'Sunday', 1724595167, 2, 2, 0),
 ('dayofweek', 'Thursday', 1724311579, 3, 3, 0),
-('dayofweek', 'Tuesday', 1724166077, 5, 5, 0),
+('dayofweek', 'Tuesday', 1724732698, 6, 6, 0),
 ('dayofweek', 'Wednesday', 1724245830, 1, 1, 0),
 ('hour', '00', 1724088966, 0, 0, 0),
 ('hour', '01', 0, 0, 0, 0),
@@ -1225,25 +1225,25 @@ INSERT INTO `nv4_counter` (`c_type`, `c_val`, `last_update`, `c_count`, `vi_coun
 ('hour', '04', 0, 0, 0, 0),
 ('hour', '05', 0, 0, 0, 0),
 ('hour', '06', 0, 0, 0, 0),
-('hour', '07', 1724631416, 1, 1, 0),
+('hour', '07', 1724631416, 0, 0, 0),
 ('hour', '08', 0, 0, 0, 0),
 ('hour', '09', 0, 0, 0, 0),
 ('hour', '10', 1724383916, 0, 0, 0),
-('hour', '11', 1724647469, 1, 1, 0),
+('hour', '11', 1724732698, 1, 1, 0),
 ('hour', '12', 0, 0, 0, 0),
 ('hour', '13', 0, 0, 0, 0),
 ('hour', '14', 1724311579, 0, 0, 0),
-('hour', '15', 1724661540, 3, 3, 0),
-('hour', '16', 1724663849, 1, 1, 0),
+('hour', '15', 1724661540, 0, 0, 0),
+('hour', '16', 1724663849, 0, 0, 0),
 ('hour', '17', 1724149105, 0, 0, 0),
 ('hour', '18', 0, 0, 0, 0),
 ('hour', '19', 0, 0, 0, 0),
 ('hour', '20', 1724593139, 0, 0, 0),
-('hour', '21', 1724680882, 1, 1, 0),
-('hour', '22', 1724426024, 0, 0, 0),
+('hour', '21', 1724680882, 0, 0, 0),
+('hour', '22', 1724684645, 0, 0, 0),
 ('hour', '23', 1724086139, 0, 0, 0),
 ('month', 'Apr', 0, 0, 0, 0),
-('month', 'Aug', 1724680882, 23, 23, 0),
+('month', 'Aug', 1724732698, 25, 25, 0),
 ('month', 'Dec', 0, 0, 0, 0),
 ('month', 'Feb', 0, 0, 0, 0),
 ('month', 'Jan', 0, 0, 0, 0),
@@ -1273,7 +1273,7 @@ INSERT INTO `nv4_counter` (`c_type`, `c_val`, `last_update`, `c_count`, `vi_coun
 ('os', 'sunos', 0, 0, 0, 0),
 ('os', 'unknown', 0, 0, 0, 0),
 ('os', 'win', 0, 0, 0, 0),
-('os', 'win10', 1724680882, 23, 23, 0),
+('os', 'win10', 1724732698, 25, 25, 0),
 ('os', 'win2000', 0, 0, 0, 0),
 ('os', 'win2003', 0, 0, 0, 0),
 ('os', 'win7', 0, 0, 0, 0),
@@ -1281,8 +1281,8 @@ INSERT INTO `nv4_counter` (`c_type`, `c_val`, `last_update`, `c_count`, `vi_coun
 ('os', 'wince', 0, 0, 0, 0),
 ('os', 'winvista', 0, 0, 0, 0),
 ('os', 'winxp', 0, 0, 0, 0),
-('total', 'hits', 1724680882, 23, 23, 0),
-('year', '2024', 1724680882, 23, 23, 0),
+('total', 'hits', 1724732698, 25, 25, 0),
+('year', '2024', 1724732698, 25, 25, 0),
 ('year', '2025', 0, 0, 0, 0),
 ('year', '2026', 0, 0, 0, 0),
 ('year', '2027', 0, 0, 0, 0),
@@ -1321,18 +1321,18 @@ CREATE TABLE `nv4_cronjobs` (
 --
 
 INSERT INTO `nv4_cronjobs` (`id`, `start_time`, `inter_val`, `inter_val_type`, `run_file`, `run_func`, `params`, `del`, `is_sys`, `act`, `last_time`, `last_result`, `vi_cron_name`, `en_cron_name`) VALUES
-(1, 1724081655, 5, 0, 'online_expired_del.php', 'cron_online_expired_del', '', 0, 1, 1, 1724683278, 1, 'Xóa các dòng ghi trạng thái online đã cũ trong CSDL', 'Delete expired online status'),
-(2, 1724081655, 1440, 0, 'dump_autobackup.php', 'cron_dump_autobackup', '', 0, 1, 1, 1724680882, 1, 'Tự động lưu CSDL', 'Automatic backup database'),
-(3, 1724081655, 60, 0, 'temp_download_destroy.php', 'cron_auto_del_temp_download', '', 0, 1, 1, 1724680882, 1, 'Xóa các file tạm trong thư mục tmp', 'Empty temporary files'),
-(4, 1724081655, 30, 0, 'ip_logs_destroy.php', 'cron_del_ip_logs', '', 0, 1, 1, 1724683278, 1, 'Xóa IP log files, Xóa các file nhật ký truy cập', 'Delete IP log files'),
-(5, 1724081655, 1440, 0, 'error_log_destroy.php', 'cron_auto_del_error_log', '', 0, 1, 1, 1724680882, 1, 'Xóa các file error_log quá hạn', 'Delete expired error_log log files'),
+(1, 1724081655, 5, 0, 'online_expired_del.php', 'cron_online_expired_del', '', 0, 1, 1, 1724836375, 1, 'Xóa các dòng ghi trạng thái online đã cũ trong CSDL', 'Delete expired online status'),
+(2, 1724081655, 1440, 0, 'dump_autobackup.php', 'cron_dump_autobackup', '', 0, 1, 1, 1724836072, 1, 'Tự động lưu CSDL', 'Automatic backup database'),
+(3, 1724081655, 60, 0, 'temp_download_destroy.php', 'cron_auto_del_temp_download', '', 0, 1, 1, 1724836072, 1, 'Xóa các file tạm trong thư mục tmp', 'Empty temporary files'),
+(4, 1724081655, 30, 0, 'ip_logs_destroy.php', 'cron_del_ip_logs', '', 0, 1, 1, 1724836072, 1, 'Xóa IP log files, Xóa các file nhật ký truy cập', 'Delete IP log files'),
+(5, 1724081655, 1440, 0, 'error_log_destroy.php', 'cron_auto_del_error_log', '', 0, 1, 1, 1724836072, 1, 'Xóa các file error_log quá hạn', 'Delete expired error_log log files'),
 (6, 1724081655, 360, 0, 'error_log_sendmail.php', 'cron_auto_sendmail_error_log', '', 0, 1, 0, 0, 0, 'Gửi email các thông báo lỗi cho admin', 'Send error logs to admin'),
-(7, 1724081655, 60, 0, 'ref_expired_del.php', 'cron_ref_expired_del', '', 0, 1, 1, 1724680882, 1, 'Xóa các referer quá hạn', 'Delete expired referer'),
-(8, 1724081655, 60, 0, 'check_version.php', 'cron_auto_check_version', '', 0, 1, 1, 1724680882, 1, 'Kiểm tra phiên bản NukeViet', 'Check NukeViet version'),
-(9, 1724081655, 1440, 0, 'notification_autodel.php', 'cron_notification_autodel', '', 0, 1, 1, 1724680882, 1, 'Xóa thông báo cũ', 'Delete old notification'),
-(10, 1724081655, 1440, 0, 'remove_expired_inform.php', 'cron_remove_expired_inform', '', 0, 1, 1, 1724680882, 1, 'Xóa thông báo quá hạn', 'Remove expired notifications'),
-(11, 1724081655, 60, 0, 'apilogs_autodel.php', 'cron_apilogs_autodel', '', 0, 1, 1, 1724680882, 1, 'Xóa các API-log hết hạn', 'Remove expired API-logs'),
-(12, 1724081655, 60, 0, 'expadmin_handling.php', 'cron_expadmin_handling', '', 0, 1, 1, 1724680882, 1, 'Xử lý admin quá hạn', 'Handling expired admins');
+(7, 1724081655, 60, 0, 'ref_expired_del.php', 'cron_ref_expired_del', '', 0, 1, 1, 1724836072, 1, 'Xóa các referer quá hạn', 'Delete expired referer'),
+(8, 1724081655, 60, 0, 'check_version.php', 'cron_auto_check_version', '', 0, 1, 1, 1724836072, 1, 'Kiểm tra phiên bản NukeViet', 'Check NukeViet version'),
+(9, 1724081655, 1440, 0, 'notification_autodel.php', 'cron_notification_autodel', '', 0, 1, 1, 1724836072, 1, 'Xóa thông báo cũ', 'Delete old notification'),
+(10, 1724081655, 1440, 0, 'remove_expired_inform.php', 'cron_remove_expired_inform', '', 0, 1, 1, 1724836072, 1, 'Xóa thông báo quá hạn', 'Remove expired notifications'),
+(11, 1724081655, 60, 0, 'apilogs_autodel.php', 'cron_apilogs_autodel', '', 0, 1, 1, 1724836072, 1, 'Xóa các API-log hết hạn', 'Remove expired API-logs'),
+(12, 1724081655, 60, 0, 'expadmin_handling.php', 'cron_expadmin_handling', '', 0, 1, 1, 1724836072, 1, 'Xử lý admin quá hạn', 'Handling expired admins');
 
 -- --------------------------------------------------------
 
@@ -5589,7 +5589,13 @@ INSERT INTO `nv4_logs` (`id`, `lang`, `module_name`, `name_key`, `note_action`, 
 (100, 'vi', 'webtools', 'Dọn dẹp hệ thống', 'clearcache, clearfiletemp, clearerrorlogs, clearip_logs', '', 1, 1724664558),
 (101, 'vi', 'login', '[admin] Đăng nhập', ' Client IP:127.0.0.1', '', 0, 1724682130),
 (102, 'vi', 'users', 'log_edit_user', 'userid 8', '', 1, 1724683436),
-(103, 'vi', 'users', 'log_edit_user', 'userid 7', '', 1, 1724683453);
+(103, 'vi', 'users', 'log_edit_user', 'userid 7', '', 1, 1724683453),
+(104, 'vi', 'login', '[admin] Đăng nhập', ' Client IP:127.0.0.1', '', 0, 1724684783),
+(105, 'vi', 'users', 'Kích hoạt tài khoản', 'userid: 9 - username: huydz', '', 1, 1724684800),
+(106, 'vi', 'login', '[admin] Thoát khỏi tài khoản quản trị', ' Client IP:127.0.0.1', '', 0, 1724686649),
+(107, 'vi', 'login', '[admin] Đăng nhập', ' Client IP:127.0.0.1', '', 0, 1724836082),
+(108, 'vi', 'webtools', 'Dọn dẹp hệ thống', 'clearcache, clearfiletemp, clearerrorlogs, clearip_logs', '', 1, 1724836101),
+(109, 'vi', 'users', 'log_del_user', 'userid 9', '', 1, 1724836579);
 
 -- --------------------------------------------------------
 
@@ -5619,7 +5625,8 @@ CREATE TABLE `nv4_notification` (
 --
 
 INSERT INTO `nv4_notification` (`id`, `admin_view_allowed`, `logic_mode`, `send_to`, `send_from`, `area`, `language`, `module`, `obid`, `type`, `content`, `add_time`, `view`) VALUES
-(1, 1, 0, '', 0, 1, 'vi', 'news', 0, 'server_config_file_changed', 'a:1:{s:4:\"file\";s:9:\".htaccess\";}', 1724661663, 0);
+(1, 1, 0, '', 0, 1, 'vi', 'news', 0, 'server_config_file_changed', 'a:1:{s:4:\"file\";s:9:\".htaccess\";}', 1724661663, 0),
+(8, 1, 0, '', 0, 1, 'vi', 'settings', 0, 'server_config_file_changed', 'a:1:{s:4:\"file\";s:9:\".htaccess\";}', 1724836469, 0);
 
 -- --------------------------------------------------------
 
@@ -12844,13 +12851,13 @@ ALTER TABLE `nv4_language_file`
 -- AUTO_INCREMENT cho bảng `nv4_logs`
 --
 ALTER TABLE `nv4_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT cho bảng `nv4_notification`
 --
 ALTER TABLE `nv4_notification`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `nv4_plugins`
@@ -12868,7 +12875,7 @@ ALTER TABLE `nv4_upload_dir`
 -- AUTO_INCREMENT cho bảng `nv4_users`
 --
 ALTER TABLE `nv4_users`
-  MODIFY `userid` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `userid` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT cho bảng `nv4_users_backupcodes`
@@ -12898,7 +12905,7 @@ ALTER TABLE `nv4_users_question`
 -- AUTO_INCREMENT cho bảng `nv4_users_reg`
 --
 ALTER TABLE `nv4_users_reg`
-  MODIFY `userid` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userid` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `nv4_vi_about`
