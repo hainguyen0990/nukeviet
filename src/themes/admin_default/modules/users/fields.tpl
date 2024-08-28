@@ -374,7 +374,7 @@
             </tbody>
         </table>
         <table class="table table-striped table-bordered" id="matrixfields" {DATAFORM.display_filefields}>
-            <caption><em class="fa fa-file-text-o">&nbsp;</em>Tiêu đề Ma Trận</caption>
+            <caption><em class="fa fa-file-text-o">&nbsp;</em>{LANG.title_matrix}</caption>
             <colgroup>
                 <col class="w250" />
             </colgroup>
@@ -383,15 +383,15 @@
             </colgroup>
             <tbody class="field_matrix">
             <tr>
-                <td>Số hàng:</td>
+                <td>{LANG.row}</td>
                 <td><input type="number" id="rows" name="rows" class="form-control" min="1" required></td>
             </tr>
             <tr>
-                <td>Số cột:</td>
+                <td>{LANG.column}</td>
                 <td><input type="number" id="cols" name="cols" class="form-control" min="1" required></td>
             </tr>
             <tr>
-                <td colspan="2"><button type="button" class="btn btn-primary" onclick="generateMatrix('{LANG.field_match_type_alphanumeric}')">Tạo Ma Trận</button></td>
+                <td colspan="2"><button type="button" class="btn btn-primary" onclick="generateMatrix('{LANG.title_column}','{LANG.title_row}')">{LANG.matrix_create}</button></td>
             </tr>
             </tbody>
         </table>
