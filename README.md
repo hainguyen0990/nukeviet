@@ -14,3 +14,4 @@ git checkout nukeviet4.6
 - Đăng nhập quản trị bằng tài khoản `admin / Ha0904462434`
 - Chú ý toàn bộ các tài khoản nếu muốn biết mật khẩu phải reset ở quản trị
 - Chú ý: Nếu đặt tên virtual host khác thì cần sửa lại trong config_global.php dòng $global_config['my_domains'] theo tên virtual host
+- Xóa cache trước khi dùng
