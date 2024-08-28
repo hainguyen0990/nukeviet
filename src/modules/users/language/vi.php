@@ -883,3 +883,4 @@ $lang_module['column'] = 'Số cột';
 $lang_module['matrix_create'] = 'Tạo ma trận';
 $lang_module['title_row'] = 'Tiêu đề hàng';
 $lang_module['title_column'] = 'Tiêu đề cột';
+$lang_module['pls_input_rows_cols'] = 'Vui lòng nhập số hàng và số cột';
