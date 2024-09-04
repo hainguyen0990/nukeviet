@@ -7,11 +7,7 @@ cd nukeviet
 git checkout nukeviet4.6
 ```
 - Virtual host: http://nukeviet.my/
-- CSDL tên nukeviet. Import từ file nukeviet.sql  từ thư mục intern
-- Chép file config.php trong thư mục intern ra đúng vị trí vào file src/
-- Chép file config_global.php trong thư mục intern ra đúng vị trí vào file src/data/config/
-- Nếu đặt tên CSDL khác thì cần sửa trong file config.php
-- Đăng nhập quản trị bằng tài khoản `admin / Ha0904462434`
-- Chú ý toàn bộ các tài khoản nếu muốn biết mật khẩu phải reset ở quản trị
-- Chú ý: Nếu đặt tên virtual host khác thì cần sửa lại trong config_global.php dòng $global_config['my_domains'] theo tên virtual host
-- Xóa cache trước khi dùng
+- Bổ sung csdl ở file change.md
+- Đăng nhập quản trị bằng tài khoản 
+- Thực hiện tùy biến dữ liệu
+- Thêm tài khoản nhập cả phần tùy biến dữ liệu đã tọa
