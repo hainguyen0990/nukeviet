@@ -42,7 +42,9 @@
             <td class="text-center"><i class="fa {ROW.show_register}"></i></td>
             <td class="text-center"><i class="fa {ROW.show_profile}"></i></td>
             <td class="text-nowrap">
+                <!-- BEGIN: edit -->
                 <button type="button" class="btn btn-default btn-sm" onclick="nv_edit_field({ROW.fid});" title="{LANG.field_edit}"><em class="fa fa-edit fa-lg"></em></button>
+                <!-- END: edit -->
                 <!-- BEGIN: show_delete -->
                 <button type="button" class="btn btn-default btn-sm" onclick="nv_del_field({ROW.fid})" title="{LANG.delete}"><em class="fa fa-trash-o fa-lg"></em></button>
                 <!-- END: show_delete -->
