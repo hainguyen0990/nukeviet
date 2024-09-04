@@ -661,6 +661,10 @@ if ($nv_Request->isset_request('qlist', 'get')) {
                 'show_profile' => ($row['show_profile']) ? 'fa-check' : ''
             ]);
 
+            if ($row['field_type'] !== 'matrix') {
+                $xtpl->parse('main.data.loop.edit');
+            }
+
             for ($i = ($row['is_system'] == 1 ? $row['weight'] : $fieldsys_offset + 1); $i <= ($row['is_system'] == 1 ? $row['weight'] : $num); ++$i) {
                 $xtpl->assign('WEIGHT', [
                     'key' => $i,
